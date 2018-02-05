@@ -60,7 +60,7 @@ while True:
             if check_int(action_choice):
                 if 3 >= int(action_choice) >= 1:
 
-                    # View
+                    # VIEW
                     if action_choice == '1':
 
                         if table_choice == '1':
@@ -78,7 +78,7 @@ while True:
                             for sale in sales:
                                 print(sale)
 
-                    # Add
+                    # ADD
                     elif action_choice == '2':
                         # Add to Merch table
                         if table_choice == '1':
@@ -102,11 +102,16 @@ while True:
                                 if db.check_id(show_id):
                                     item = input("Item: \n")
                                     if db.check_item(item):
-                                        sold = input("Amount Sold: \n")
-                                        if check_int(sold):
-                                            db.add_sale(show_id, item, sold)
+                                        price = input("Price: \n")
+                                        if check_float(price):
+                                            if db.check_price(price):
+                                                sold = input("Amount Sold: \n")
+                                                if check_int(sold):
+                                                    db.add_sale(show_id, item, sold)
+                                            else:
+                                                print("Please try again with a valid item.")
                                         else:
-                                            print("Please try again with a valid item.")
+                                            print("Please try again with a valid price.")
                                     else:
                                         print("Please try again with a valid item.")
                                 else:
@@ -114,7 +119,7 @@ while True:
                             else:
                                 print("Please try again with a valid number")
 
-                    # Search
+                    # SEARCH
                     elif action_choice == '3':
 
                         # Search Merch table

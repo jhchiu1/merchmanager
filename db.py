@@ -10,7 +10,7 @@ inspector = inspect(engine)
 # View all rows and columns in Merch table
 def view_merch():
     view_session = Session()
-    shows = view_session.query(Shows).all()
+    shows = view_session.query(Merch).all()
     view_session.close()
     return shows
 
@@ -104,7 +104,7 @@ def get_most_sold():
     get_stats_session.close()
     for item in max_sold_query:
         return 'Best-selling item at a show: ' + str(item[0]) + ' at ' + str(item[1]) + \
-               ' units sold during show #' + str(item[2]) + "\n"
+               ' units sold at show #' + str(item[2]) + "\n"
 
 
 # Return a string telling user which item earned the most money at a show
@@ -114,7 +114,7 @@ def get_best_earner():
     get_stats_session.close()
     for item in best_earner_query:
         return 'Best-earning item at a show: ' + str(item[0]) + ' at $' + '{0:.2f}'.format(item[1]) + \
-               ' earned during show #' + str(item[2]) + "\n"
+               ' earned at show #' + str(item[2]) + "\n"
 
 
 # Return a string telling user which item sold the most in total
@@ -161,6 +161,16 @@ def check_item(item):
     num_items = check_item_session.query(Merch).filter_by(item=item).count()
     check_item_session.close()
     if num_items > 0:
+        return True
+    else:
+        return False
+
+# Check if user input item price exists in Merch table
+def check_price(price):
+    check_price_session = Session()
+    num_price = check_price_session.query(Merch).filter_by(price=price).count()
+    check_price_session.close()
+    if num_price > 0:
         return True
     else:
         return False

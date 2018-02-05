@@ -20,7 +20,7 @@ class Merch(Base):
         return 'Item: {} Price: ${}'.format(self.item, self.price)
 
 
-# Table 2: Shows: show ID, date, venue(ex: 01, 12/12/12, Myth)
+# Table 2: Shows: show ID, date, venue (ex: 01, 11/11/11, Myth)
 class Shows(Base):
 
     __tablename__ = 'shows'
@@ -30,7 +30,7 @@ class Shows(Base):
     venue = Column(String)
 
     def __repr__(self):
-        return 'Show id: {} Date: {} Venue: {}'.format(self.show_id, self.date, self.venue)
+        return 'Show ID: {} Date: {} Venue: {}'.format(self.show_id, self.date, self.venue)
 
 
 # Table 3: Sales: show ID, merch name, price, number sold (ex: 01, CD, 15.00, 10)
@@ -44,14 +44,14 @@ class Sales(Base):
     sold = Column(Integer)
 
     def __repr__(self):
-        return 'Show id: {} Item: {} Price: {} Sold: {}'.format(self.show_id, self.item, self.price, self.sold)
+        return 'Show ID: {} Item: {} Price: {} Sold: {}'.format(self.show_id, self.item, self.price, self.sold)
 
 
 # Create the tables
 Base.metadata.create_all(engine)
 
 
-# Check to see if sample data has already been created, returns true or false
+# Check if sample data has already been created, returns true or false
 # Issue adding to db.py due to Python not liking circular dependencies
 def check_sample_present():
     check_session = Session()
